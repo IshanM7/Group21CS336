@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Customer Rep Dashboard</title>
+	<meta charset="UTF-8">
+	<title>Customer Rep Dashboard</title>
+	<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 	
@@ -14,10 +15,10 @@
 	
 	
 	<ul>
-		<li><a href="customerRepQuestionPage.jsp">QNA Page</a></li>
-		<li><a href="deleteAccount.jsp">Delete an Account</a>	</li>
+		<li><a href="questionSearch.jsp">QNA Page</a></li>
+		<li><a href="customerRepEditAccount.jsp">Edit an Account</a>	</li>
 		<li><a href="removeBid.jsp">Remove Bid</a></li>
-		<li><a href='removeAuction.jsp'>Remove Auction</a></li>
+		<li><a href='auctions.jsp'>Remove Auction</a></li>
 	</ul>
 	<a href='logout.jsp'>Log out</a>
 </body>

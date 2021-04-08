@@ -7,9 +7,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="style.css?v=1.0"/>
+	<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+
+
+
 	<%
 		
 		int userid = (Integer)session.getAttribute("userid");
@@ -20,15 +23,60 @@
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");		   
 		
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM Questions WHERE askID = ? ORDER BY answered ASC;");
-		stmt.setInt(1,userid);	 		 
-		
-		
-		
-		ResultSet rs = stmt.executeQuery();
-		
-		if(rs.next()){%>
-		
+		String category = request.getParameter("category");
+		if(category.equals("all")){
+			
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Questions WHERE askID = ? ORDER BY answered DESC;");
+			stmt.setInt(1,userid);	 		 
+			
+			
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()){%>
+			
+				 <h1> Your Questions </h1>
+				 
+			 		
+			 		<%do{%>
+			 		<table>
+				 		<tr>
+				 			<th>Question</th>
+				 			
+				 			<th>Answer</th>
+				 			<th>Category</th>
+				 		</tr>
+			 			
+			 			<tr>
+			 				<td><%out.println("<a> "+rs.getString("qtext")+"</a>"); %></td>
+			 				
+			 				<%if(rs.getInt("answered") == 1){ %>
+			 					<td><%out.println("<a> "+rs.getString("atext")+"</a>"); %> </td>
+			 					
+			 				<%}else{ %>
+			 					<td> The question has not been answered yet</td>
+			 				<% } %>
+			 				<td style="text-align:center"> <%out.println("<a> "+rs.getString("qtype")+"</a>"); %></td>
+			 			</tr>
+			 		</table>
+			 		<br>
+		 			<br>
+			 		<%}while(rs.next());%>
+			 		
+			 		
+				 
+				
+			<%} else { %>
+				<h1>You have no questions</h1>
+			<%} %>
+		<%} else {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Questions WHERE askID = ? AND qtype = ? ORDER BY answered DESC;");
+			stmt.setInt(1,userid);
+			stmt.setString(2,category);	 	
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()){%>
+			
 			 <h1> Your Questions </h1>
 			 
 		 		
@@ -38,6 +86,7 @@
 			 			<th>Question</th>
 			 			
 			 			<th>Answer</th>
+			 			<th>Category</th>
 			 		</tr>
 		 			
 		 			<tr>
@@ -49,6 +98,8 @@
 		 				<%}else{ %>
 		 					<td> The question has not been answered yet</td>
 		 				<% } %>
+		 				<td style="text-align:center"> <%out.println("<a> "+rs.getString("qtype")+"</a>"); %></td>
+		 			</tr>
 		 		</table>
 		 		<br>
 	 			<br>
@@ -60,10 +111,11 @@
 		<%} else { %>
 			<h1>You have no questions</h1>
 		<%} %>
+			
+			
+	<%} %>
 		
 		
 		
-	
-	
 </body>
 </html>

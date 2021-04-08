@@ -15,14 +15,18 @@
 		int userid = (Integer)session.getAttribute("userid");
 		
 		String questionText = request.getParameter("Question");
+		
 		String sql;
+		
+		String category = request.getParameter("category");
+		System.out.println(category);		
 		int err = 0;
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");		   
 		
 		
 		Statement stmt = con.createStatement();
-		sql =" INSERT INTO Questions (askID,qtext,answered) VALUES ('" + userid + "','" + questionText + "',0)";	 		 
+		sql =" INSERT INTO Questions (askID,qtype,qtext,answered) VALUES ('" + userid + "','" + category+"','"+ questionText + "',0)";	 		 
 		err = stmt.executeUpdate(sql);
 		if(err > 0){
 			out.println("Question submitted successfully <a href='endUserHome.jsp'>Go Home</a>");

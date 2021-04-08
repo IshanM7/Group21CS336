@@ -11,12 +11,7 @@
 	<% String x = session.getAttribute("user").toString();
 		out.println("<h1>Welcome "+x+"</h1>");
 	%>
-	
-	
-	
-	
-	
-	
+
 	<ul>
 		<li><a href="generateSalesReports.jsp">Generate sales reports</a></li>
 		<li><a href="customerRepRegister.jsp">Create a customer rep account</a>	</li>

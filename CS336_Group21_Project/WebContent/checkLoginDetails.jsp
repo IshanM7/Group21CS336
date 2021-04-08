@@ -22,7 +22,7 @@
 		    if(rs.next()){
 			    
 		    	String checkPass = rs.getString("Password");
-			    System.out.println(checkPass);
+			    
 			    if(checkPass.equals(pwd)){
 			    	pass = true;
 			    }

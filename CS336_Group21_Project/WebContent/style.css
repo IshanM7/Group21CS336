@@ -15,7 +15,8 @@ table {
 td {
   border: solid 1px;
   width: 500px;
-  
+  vertical-align:
+  	middle;
 }
 
 .dropbtn {

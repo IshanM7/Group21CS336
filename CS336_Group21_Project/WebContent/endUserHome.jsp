@@ -13,7 +13,7 @@
 	
 	<ul>
 		<li><a href="endUserAskQuestionPage.jsp">Ask a question</a></li>
-		<li><a href="endUserQuestionPage.jsp">View Your Questions</a></li>
+		<li><a href="questionSearch.jsp">View Your Questions</a></li>
 	</ul>
 	
 	<a href='logout.jsp'>Log out</a>
