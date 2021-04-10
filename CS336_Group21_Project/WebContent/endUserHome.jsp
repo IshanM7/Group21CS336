@@ -12,6 +12,8 @@
 	%>
 	
 	<ul>
+		<li><a href="postAuction.jsp">Post an Auction</a></li>
+		<li><a href="searchAuctions.jsp">Search for an Auction</a></li>
 		<li><a href="endUserAskQuestionPage.jsp">Ask a question</a></li>
 		<li><a href="questionSearch.jsp">View Your Questions</a></li>
 	</ul>
