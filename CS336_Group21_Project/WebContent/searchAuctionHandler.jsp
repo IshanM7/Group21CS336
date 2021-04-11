@@ -38,7 +38,7 @@
 			    product.next();				
 			%>		 		
 		 			<%if(product.getString("type").equals("shirt")){ %>		 					 		
-				 		<form method = "post" action = "bidHandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
+				 		<form method = "post" action = "viewAuction.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
@@ -79,7 +79,7 @@
 					 	<% }%>
 					 	
 			 		<%}else if(product.getString("type").equals("pant")){ %>
-			 			<form method = "post" action = "bidHandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
+			 			<form method = "post" action = "viewAuction.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
@@ -124,7 +124,7 @@
 			 		
 			 		<%}else{ %>
 			 		
-			 			<form method = "post" action = "bidHandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
+			 			<form method = "post" action = "viewAuction.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
