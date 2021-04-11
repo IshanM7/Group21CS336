@@ -18,7 +18,7 @@
 		<li><a href="questionSearch.jsp">QNA Page</a></li>
 		<li><a href="customerRepEditAccount.jsp">Edit an Account</a>	</li>
 		<li><a href="removeBid.jsp">Remove Bid</a></li>
-		<li><a href='auctions.jsp'>Remove Auction</a></li>
+		<li><a href='searchAuctions.jsp'>Search Auctions</a></li>
 	</ul>
 	<a href='logout.jsp'>Log out</a>
 </body>

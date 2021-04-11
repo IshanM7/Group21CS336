@@ -23,7 +23,7 @@
 		                    
 		                    <td>
 		                    		
-		                    	<select name="category" id="category">
+		                    	<select name="category" id="category" required>
 								<option value="">Select category</option>
 								<option value="auctionHelp">Auction Questions</option>
 								<option value="accountHelp">Account Questions</option>
@@ -50,7 +50,7 @@
 		                    
 		                    <td>
 		                    		
-		                    	<select name="category" id="category">
+		                    	<select name="category" id="category" required>
 								<option value="">Select category</option>
 								<option value="auctionHelp">Auction Questions</option>
 								<option value="accountHelp">Account Questions</option>

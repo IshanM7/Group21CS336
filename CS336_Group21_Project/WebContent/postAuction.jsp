@@ -9,21 +9,26 @@
 </head>
 <body>
 	<h1>Create an Auction</h1>
-	<form action="postAuctionHandler.jsp" method="POST">
+	<form action="postAuctionPt2.jsp" method="POST">
 		
-		Starting Price(Max 9999):<input type="number" step="0.01" min = "0.00" name="initialPrice"/><br/>
-		Increment:<input type="number" step="0.01" min = "0.00" name="increment"/><br/>
-		Start Date(YYYY-MM-DD):<input type="date" name="startDate"/><br/>
-		End Date(YYYY-MM-DD):<input type="date" name="endDate"/><br/>
 		
+		Gender 
+		<select name="gender" id="gender" required>
+		 <option value="" disabled selected hidden = "true">Select Gender</option>
+		  <option value="M">male</option>
+		  <option value="F">female</option>
+		</select>
 		
 		<h2>Please choose the type of apparel</h2>
-		<input type="radio" name="apparelType" value="shirt" /> Shirt <br />
-		<input type="radio" name="apparelType" value="pant"/> Pants <br />
-		<input type="radio" name="apparelType" value="shoe"/> Shoes <br />
+		<select name="apparelType" id="apparelType" required>
+		  <option value="" disabled selected hidden = "true">Select Type</option>
+		  <option value="shirt">Shirts</option>
+		  <option value="pant">Pants</option>
+		  <option value="shoe">Shoes</option>
 		
+		</select>
 		<input type="submit" value="Submit"/>
-	
+		
      </form>
 </body>
 </html>
