@@ -38,7 +38,7 @@
 			    product.next();				
 			%>		 		
 		 			<%if(product.getString("type").equals("shirt")){ %>		 					 		
-				 		<form method = "post" action = "bidHandler.jsp">		 					 			
+				 		<form method = "post" action = "bidHandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
@@ -79,7 +79,7 @@
 					 	<% }%>
 					 	
 			 		<%}else if(product.getString("type").equals("pant")){ %>
-			 			<form method = "post" action = "bidHandler.jsp">		 					 			
+			 			<form method = "post" action = "bidHandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
@@ -106,8 +106,9 @@
 				                
 					 		</table>
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("userid") == 3) {%>					 									 								 									 									 									 			
-						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
-				                     <input type="submit" value="Submit"/>					 		
+						 			Place Bid: <input  type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
+				                    Setup Automatic Bidding	<input required type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />
+				                     <input type="submit" value="Submit"/>
 				 			<%}%>			                
 					 	</form>
 					 	<br/>
@@ -123,7 +124,7 @@
 			 		
 			 		<%}else{ %>
 			 		
-			 			<form method = "post" action = "bidHandler.jsp">		 					 			
+			 			<form method = "post" action = "bidHandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>

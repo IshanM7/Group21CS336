@@ -56,13 +56,9 @@
  					<option value="shoes">Shoes</option>
 				</select>
 
-				  <label for="color"producti>Color:</label>
-				  <input type="text" id = "color" name = "color" placeholder="Color.." required>
-
-				  <label for="pID">Product ID:</label>
+				  <label for="username">Username:</label>
 				  <input type="text" id = "pID" name = "pID" placeholder="Product ID.." required>
 				  <input type="submit">
-
 				</form>
 
 		</section>
