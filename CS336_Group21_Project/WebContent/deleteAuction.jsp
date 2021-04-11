@@ -11,21 +11,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>He</h1>
+	
 	<% 
 		Class.forName("com.mysql.jdbc.Driver");
-    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");		   
+    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!");		   
 		
     	int aid = Integer.parseInt(request.getParameter("aid"));
     	
     	PreparedStatement st = con.prepareStatement("DELETE FROM Auction WHERE AuctionID = ?");
     	st.setInt(1,aid);
     	int err = st.executeUpdate();
-    	
-    	if(err  > 0){
-    		out.println("Auction deleted successfully <a href='customerRepHome.jsp'>Go Home</a>");
-    	}else{
-    		out.println("Auction failed to delete  <a href='customerRepHome.jsp'>Go Home</a>");
+    	if(((Integer)session.getAttribute("role")) < 3){
+	    	if(err  > 0){
+	    		out.println("Auction deleted successfully <a href='customerRepHome.jsp'>Go Home</a>");
+	    	}else{
+	    		out.println("Auction failed to delete  <a href='customerRepHome.jsp'>Go Home</a>");
+	    	}
+	    }
+    	else{
+    		if(err  > 0){
+	    		out.println("Auction deleted successfully <a href='endUserHome.jsp'>Go Home</a>");
+	    	}else{
+	    		out.println("Auction failed to delete  <a href='endUserHome.jsp'>Go Home</a>");
+	    	}
     	}
     	
 	%>

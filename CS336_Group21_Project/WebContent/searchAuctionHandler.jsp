@@ -13,7 +13,7 @@
 <body>
 	<%
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001"); 
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!"); 
 		
 		
 		Statement stmt = con.createStatement();
@@ -38,7 +38,7 @@
 			    product.next();				
 			%>		 		
 		 			<%if(product.getString("type").equals("shirt")){ %>		 					 		
-				 		<form method = "post" action = "viewAuction.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
+				 		<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
@@ -66,11 +66,13 @@
 					 		</table>
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("userid") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
+				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
+				                    
 				                     <input type="submit" value="Submit"/>					 		
 				 			<%}%>			                
 					 	</form>
 					 	<br/>
-					 	<%if(((Integer)session.getAttribute("role")) < 3){ %>
+					 	<%if(((Integer)session.getAttribute("role")) < 3|| ((Integer)session.getAttribute("userid")) == rs.getInt("AccountID") ){ %>
 					 		<form method="post" action="deleteAuction.jsp?aid=<%=rs.getInt("AuctionID")%>&seller=<%=rs.getInt("AccountID")%>">	
 					 			<input type = "submit" value = "Delete Auction"> 
 					 			
@@ -79,7 +81,7 @@
 					 	<% }%>
 					 	
 			 		<%}else if(product.getString("type").equals("pant")){ %>
-			 			<form method = "post" action = "viewAuction.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
+			 			<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
@@ -106,13 +108,13 @@
 				                
 					 		</table>
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("userid") == 3) {%>					 									 								 									 									 									 			
-						 			Place Bid: <input  type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
-				                    Setup Automatic Bidding	<input required type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />
+						 			Place Bid: <input  required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
+				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
 				                     <input type="submit" value="Submit"/>
 				 			<%}%>			                
 					 	</form>
 					 	<br/>
-					 	<%if(((Integer)session.getAttribute("role")) < 3){ %>
+					 	<%if(((Integer)session.getAttribute("role")) < 3|| ((Integer)session.getAttribute("userid")) == rs.getInt("AccountID") ){ %>
 					 		<form method="post" action="deleteAuction.jsp?aid=<%=rs.getInt("AuctionID")%>&seller=<%=rs.getInt("AccountID")%>">	
 					 			<input type = "submit" value = "Delete Auction"> 
 					 			
@@ -124,7 +126,7 @@
 			 		
 			 		<%}else{ %>
 			 		
-			 			<form method = "post" action = "viewAuction.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
+			 			<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Seller ID</th>
@@ -150,11 +152,13 @@
 					 		</table>
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("userid") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
+				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
+				                     
 				                     <input type="submit" value="Submit"/>					 		
 				 			<%}%>			                
 					 	</form>
 					 	<br/>
-					 	<%if(((Integer)session.getAttribute("role")) < 3){ %>
+					 	<%if(((Integer)session.getAttribute("role")) < 3 || ((Integer)session.getAttribute("userid")) == rs.getInt("AccountID") ){ %>
 					 		<form method="post" action="deleteAuction.jsp?aid=<%=rs.getInt("AuctionID")%>&seller=<%=rs.getInt("AccountID")%>">	
 					 			<input type = "submit" value = "Delete Auction"> 
 					 			

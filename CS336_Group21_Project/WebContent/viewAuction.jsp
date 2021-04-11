@@ -13,7 +13,7 @@
 <body>
 
 	<% 
-		String view = request.getParameter("userAuctionID");
+		String view = request.getParameter("aucId2");
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!");
 	    String str = "SELECT a.ProductID as 'Product',a.CurrentBid as 'Current',a.Start_Date as 'Start Date',a.InitialPrice as 'InitPrice', a.End_Date as 'End Date', a.Increment as 'Minimum Increment' FROM Auction a WHERE a.AuctionID = " + view; 
@@ -84,10 +84,12 @@
 	
 	%>
 	
-<form action = "bidhandler.jsp?aucId2=<%=request.getParameter("aucId")%>" method = POST>
-<h2>How much would you like to bid?</h2>
-Bid:<input type="number" default = 0 name="userBid"required/><br/>
+<form action = "bidhandler.jsp?aucId=<%=view%>" method = POST>
+<h2>Confirm your bid</h2>
+Bid:<input type="number" default = 0 name="bid"required/><br/>
+<input type = "submit" value = "Place bid" />
 </form>
+
 <input type="button" value="Go Back to search auctions" onclick="window.location='searchAuctions.jsp'" />
 
 
