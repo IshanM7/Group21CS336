@@ -15,7 +15,7 @@
 	<% 
 		String view = request.getParameter("aucId2");
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!");
+	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");
 	    String str = "SELECT a.ProductID as 'Product',a.CurrentBid as 'Current',a.Start_Date as 'Start Date',a.InitialPrice as 'InitPrice', a.End_Date as 'End Date', a.Increment as 'Minimum Increment' FROM Auction a WHERE a.AuctionID = " + view; 
 	    Statement stmt = con.createStatement();
 	    ResultSet result = stmt.executeQuery(str);
