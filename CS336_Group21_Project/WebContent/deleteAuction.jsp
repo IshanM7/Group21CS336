@@ -14,7 +14,7 @@
 	
 	<% 
 		Class.forName("com.mysql.jdbc.Driver");
-    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!");		   
+    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");		   
 		
     	int aid = Integer.parseInt(request.getParameter("aid"));
     	
