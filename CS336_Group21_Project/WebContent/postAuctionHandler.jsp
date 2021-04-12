@@ -18,15 +18,17 @@
 		double startPrice = Double.parseDouble(request.getParameter("initialPrice"));		
 		double increment =  Double.parseDouble(request.getParameter("increment"));
 		double reserve  = Double.parseDouble(request.getParameter("reserve"));
-		String startDate = "2021/"+request.getParameter("startDate");
-		String endDate = "2021/"+request.getParameter("endDate");
+		String startDate = "2021/"+request.getParameter("startDate")+" 00:00:00";
+		String endDate = "2021/"+request.getParameter("endDate")+" 00:00:00";
 		String type = request.getParameter("apparelType");
 		String color = request.getParameter("color");
 		String gender = request.getParameter("gender");
+		String startDate1 = "2021/"+request.getParameter("startDate");
+		String endDate1 = "2021/"+request.getParameter("endDate");
 		int c = 0;
 		
-		Date sDate =new SimpleDateFormat("yyyy/MM/dd").parse(startDate);  
-		Date eDate =new SimpleDateFormat("yyyy/MM/dd").parse(endDate);  
+		Date sDate =new SimpleDateFormat("yyyy/MM/dd").parse(startDate1);  
+		Date eDate =new SimpleDateFormat("yyyy/MM/dd").parse(endDate1);  
 		
 		if(eDate.compareTo(sDate) <= 0){
 			out.println("Please choose a date after the starting date, it cannot be the same date <a href='endUserHome.jsp'>Go Home</a>");
@@ -80,7 +82,7 @@
 					ResultSet key = stmt.getGeneratedKeys();
 					key.next();
 					int PID = key.getInt(1);
-					System.out.println(PID);
+					
 					int userid = (Integer)session.getAttribute("userid");
 					String inputAuction = "INSERT INTO Auction (ProductID, AccountID, Start_Date,End_Date,Reserve,Increment,InitialPrice) VALUES (" + PID + "," +userid+",'"+startDate + "','" + endDate + "',"+reserve+","+increment+","+startPrice+");";
 					

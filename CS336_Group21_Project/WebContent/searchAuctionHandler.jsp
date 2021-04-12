@@ -41,7 +41,7 @@
 				 		<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
-						 			<th>Seller ID</th>
+						 			<th>Auction ID</th>
 						 			<th>Type</th>
 						 			<th>End Date</th>
 						 			<th>Initial Price</th>											 							 			
@@ -53,9 +53,9 @@
 						 		</tr>
 					 			
 					 			<tr>
-					 				<td><%out.println(rs.getInt("AccountID")); %> </td>
+					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Shirt </a>"); %></td>
-					 				<td><%out.println(rs.getString("End_Date")); %></td>
+					 				<td style="text-align:center"><%out.println((rs.getString("End_Date")).substring(5,10)); %></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("InitialPrice"));%></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("CurrentBid"));%></td>
 					 				<td><% out.println(product.getString("Shirt_Type"));%></td>
@@ -64,7 +64,7 @@
 					 			</tr>
 				                
 					 		</table>
-				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("userid") == 3) {%>					 									 								 									 									 									 			
+				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
 				                    
@@ -72,7 +72,7 @@
 				 			<%}%>			                
 					 	</form>
 					 	<br/>
-					 	<%if(((Integer)session.getAttribute("role")) < 3|| ((Integer)session.getAttribute("userid")) == rs.getInt("AccountID") ){ %>
+					 	<%if(((Integer)session.getAttribute("role")) < 3 || ((Integer)session.getAttribute("userid")) == rs.getInt("AccountID")){ %>
 					 		<form method="post" action="deleteAuction.jsp?aid=<%=rs.getInt("AuctionID")%>&seller=<%=rs.getInt("AccountID")%>">	
 					 			<input type = "submit" value = "Delete Auction"> 
 					 			
@@ -84,7 +84,7 @@
 			 			<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
-						 			<th>Seller ID</th>
+						 			<th>Auction ID</th>
 						 			<th>Type</th>
 						 			<th>End Date</th>
 						 			<th>Initial Price</th>											 							 			
@@ -96,9 +96,9 @@
 						 		</tr>
 					 			
 					 			<tr>
-					 				<td><%out.println(rs.getInt("AccountID")); %> </td>
+					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Pants </a>"); %></td>
-					 				<td><%out.println(rs.getString("End_Date")); %></td>
+					 				<td style="text-align:center"><%out.println((rs.getString("End_Date")).substring(5,10)); %></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("InitialPrice"));%></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("CurrentBid"));%></td>
 					 				<td ><% out.println(product.getInt("Waist_Size"));%></td>
@@ -107,7 +107,8 @@
 					 			</tr>
 				                
 					 		</table>
-				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("userid") == 3) {%>					 									 								 									 									 									 			
+				 				<% 
+				 			if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input  required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
 				                     <input type="submit" value="Submit"/>
@@ -129,7 +130,7 @@
 			 			<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
-						 			<th>Seller ID</th>
+						 			<th>Auction ID</th>
 						 			<th>Type</th>
 						 			<th>End Date</th>
 						 			<th>Initial Price</th>											 							 			
@@ -140,9 +141,9 @@
 						 		</tr>
 					 			
 					 			<tr>
-					 				<td><%out.println(rs.getInt("AccountID")); %> </td>
+					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Shoes </a>"); %></td>
-					 				<td><%out.println(rs.getString("End_Date")); %></td>
+					 				<td style="text-align:center"><%out.println((rs.getString("End_Date")).substring(5,10)); %></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("InitialPrice"));%></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("CurrentBid"));%></td>
 					 				<td><% out.println(product.getDouble("Shoe_Size"));%></td>
@@ -150,7 +151,7 @@
 					 			</tr>
 				                
 					 		</table>
-				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("userid") == 3) {%>					 									 								 									 									 									 			
+				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
 				                     
