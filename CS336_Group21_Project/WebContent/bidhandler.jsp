@@ -33,11 +33,10 @@ current = result.getDouble("Current");
 initPrice = result.getDouble("InitPrice");
 increment =  result.getInt("Increment");
 
-}
-
-if(current == 0){
-	
+}System.out.println(current +"<-- Current, bid --> "+ bid +"\n initPrice-->"+initPrice);
+if(current == 0){	System.out.println("here");
 	if(bid>=initPrice+increment){
+		
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setDouble(1, bid);
 		stmt.setInt(2, (Integer)session.getAttribute("userid"));
@@ -54,8 +53,23 @@ if(current == 0){
 		<%
 	}
 		else{
+			
 			out.print("Failed to place bid.");
+			%><li>
+		  <form action = "viewAuction.jsp?aucId2=<%=view%>" method = POST>
+		  <input type="submit" value="Place a bid again" /></a>
+		  </form>
+		  </li>  <% 
 		}
+		
+	}else{
+		%>Bid is not incremented enough from current bid or initial price
+		  <li>
+		  <form action = "viewAuction.jsp?aucId2=<%=view%>" method = POST>
+		  <input type="submit" value="Place a bid again" /></a>
+		  </form>
+		  </li> 
+		 <% 
 	}
 }
 else if(bid>=current+increment){
@@ -82,6 +96,11 @@ else if(bid>=current+increment){
 	}
 	else{
 		out.print("Failed to place bid.");
+		%><li>
+		  <form action = "viewAuction.jsp?aucId2=<%=view%>" method = POST>
+		  <input type="submit" value="Place a bid again" /></a>
+		  </form>
+		  </li>  <% 
 	}
 }
 else{
