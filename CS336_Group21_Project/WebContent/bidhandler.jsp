@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Bidding</title>
 </head>
 <body>
 
 <%
 Class.forName("com.mysql.jdbc.Driver").newInstance();
-Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!");
 String sql = "UPDATE Auction SET CurrentBid = ?, CurrentBuyer = ? WHERE AuctionID = ?;";
 double bid = Double.parseDouble(request.getParameter("bid"));
 int auctionID = Integer.parseInt(request.getParameter("aucId"));
@@ -33,8 +33,8 @@ current = result.getDouble("Current");
 initPrice = result.getDouble("InitPrice");
 increment =  result.getInt("Increment");
 
-}System.out.println(current +"<-- Current, bid --> "+ bid +"\n initPrice-->"+initPrice);
-if(current == 0){	System.out.println("here");
+}
+if(current == 0){	
 	if(bid>=initPrice+increment){
 		
 		PreparedStatement stmt = con.prepareStatement(sql);
