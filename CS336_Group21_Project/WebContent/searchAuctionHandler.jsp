@@ -13,7 +13,7 @@
 <body>
 	<%
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001"); 
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!"); 
 		
 		
 		Statement stmt = con.createStatement();
@@ -37,7 +37,7 @@
 			    ResultSet product = st.executeQuery();
 			    product.next();				
 			%>		 		
-		 			<%if(product.getString("type").equals("shirt")){ %>		 					 		
+		 			<%if(product.getString("type").equals("shirt")){ 	%>		 					 		
 				 		<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
@@ -65,8 +65,9 @@
 				                
 					 		</table>
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
-						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
-				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
+						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />	
+						 			           <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
+				             
 				                    
 				                     <input type="submit" value="Submit"/>					 		
 				 			<%}%>			                
@@ -109,9 +110,8 @@
 					 		</table>
 				 				<% 
 				 			if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
-						 			Place Bid: <input  required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
-				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
-				                     <input type="submit" value="Submit"/>
+						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
+				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 				 			<%}%>			                
 					 	</form>
 					 	<br/>
@@ -153,7 +153,7 @@
 					 		</table>
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
-				                    Setup Automatic Bidding	<input type="number" name = "automatic" min = <%=rs.getDouble("CurrentBid")+ rs.getInt("Increment")-1%> step = ".01" />
+				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 				                     
 				                     <input type="submit" value="Submit"/>					 		
 				 			<%}%>			                
