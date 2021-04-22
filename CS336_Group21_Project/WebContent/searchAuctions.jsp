@@ -36,8 +36,8 @@
 	<body>
 			
 		<section>
-				<form action="searchAuctionHandler.jsp">
 				<h3>Search Item</h3>
+				<form action="sortAuctions.jsp">
 	
 				<label for="sex">Sex:</label>
 
@@ -46,25 +46,32 @@
  					<option value="M">M</option>
   					<option value="F">F</option>
 				</select>
+				<button>Search</button>
+				</form>
+				<form action="sortAuctions.jsp">
 							
 				<label for="item">Items:</label>
 
 				<select name="item" required>
 				    <option disabled selected value> -- </option>
- 					<option value="shirts">Shirts</option>
-  					<option value="pants">Pants</option>
- 					<option value="shoes">Shoes</option>
+ 					<option value="shirt">Shirts</option>
+  					<option value="pant">Pants</option>
+ 					<option value="shoe">Shoes</option>
 				</select>
+				<button>Search</button>
+				</form>
+				<form action="sortAuctions.jsp">
 
-				  <label for="username">Username:</label>
-				  <input type="text" id = "pID" name = "pID" placeholder="Product ID.." required>
-				  <input type="submit">
+				  <label for="color">Color:</label>
+				  <input type="text" id = "color" name = "color" placeholder="Color.." required>
+				<button>Search</button>
+
 				</form>
 
 		</section>
 		
 		<section>
-			<form action="searchAuctionHandler.jsp">
+			<form action="sortAuctions.jsp">
 			<h3>Sort All Items</h3>
 							
 				<label for="type">Sort by:</label>
@@ -73,22 +80,14 @@
 				    <option disabled selected value> -- </option>
   					<option value="price">Price</option>
  					<option value="type">Type</option>
-  					<option value="numerical">Numerical</option>
- 					<option value="product">Product</option>
+  					<option value="color">Color</option>
 				</select>
 				
-				<label for="order">Order:</label>
-
-				<select name="order" required>
-				    <option disabled selected value> -- </option>
-  					<option value="ascending">Ascending</option>
- 					<option value="descending">Descending</option>
-				</select>
 				<button>Search</button>
 				</form>
 		</section>
 		
-	<a href='endUserHome.jsp'>Return to Home</a>
+	<a href='EndUserHome.jsp'>Return to Home</a>
 	<a href='logout.jsp'>Log out</a>
 				
 </html>
