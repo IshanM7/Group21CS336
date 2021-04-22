@@ -29,16 +29,16 @@
 	<%                                                            
 	int userid = (Integer)session.getAttribute("userid");
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");  
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!");  
 	  Date date = new Date();
 	  Timestamp timestamp1 = new Timestamp(date.getTime());
-	  String sql = "Select * from Auction where CurrentBuyer = " + userid + " and sold = 0";
+	  String sql = "Select * from Auction where sold = 0";
 	  PreparedStatement stmt = con.prepareStatement(sql);
 	 
 	  ResultSet result = stmt.executeQuery(sql);
 	  
 	  
-	  int count = 0;
+
 		while(result.next()){
 			Date temp = new Date();
 			temp.setTime(timestamp1.getTime());
@@ -52,21 +52,27 @@
 				
 			}
 			else{
-				if(count == 0){
-				%> You won an Auction(s)! Check Notifications.  <% 
-				count++;
-					
-				}
+				int currentbuy = result.getInt("CurrentBuyer");
 				int reserve = result.getInt("Reserve");
 				double currentB = result.getDouble("CurrentBid");
+				int auction = result.getInt("AuctionID");
 				if(reserve != 0){
 					if(currentB>=reserve){
-						String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = CurrentBid WHERE CurrentBuyer = ?;";
+						String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = CurrentBid where AuctionID = ?;";
 						PreparedStatement stmt1 = con.prepareStatement(sql1);
-						stmt1.setInt(1, (Integer)session.getAttribute("userid"));
+						stmt1.setInt(1, auction);
 						int l = stmt1.executeUpdate();
 						if(l<0){
 							System.out.println("Nope");
+							break;
+						}
+						String str = "insert into Alert(AccountID, AuctionID, Alert) values (" + currentbuy + ", " + auction  + ", 'You won!')";
+						PreparedStatement st = con.prepareStatement(str);
+						int i = st.executeUpdate();
+						if(i>0){
+							continue; // alert successfully added, continue to next auction dub
+						}
+						else{
 							break;
 						}
 					
@@ -76,15 +82,7 @@
 					
 					
 					
-					String str = "insert into Alert(AccountID, AuctionID, Alert) values (" + userid + ", " +result.getString("AuctionID") + ", 'You won!')";
-					PreparedStatement st = con.prepareStatement(str);
-					int i = st.executeUpdate();
-					if(i>0){
-						continue; // alert successfully added, continue to next auction dub
-					}
-					else{
-						break;
-					}
+					
 					
 					}
 					else{
@@ -93,34 +91,50 @@
 				}
 				else{ // if there is no reserve 
 				
-				String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = CurrentBid WHERE CurrentBuyer = ?;";
+				
+				String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = CurrentBid WHERE AuctionID = ?;";
 				PreparedStatement stmt1 = con.prepareStatement(sql1);
-				stmt1.setInt(1, (Integer)session.getAttribute("userid"));
+				stmt1.setInt(1, auction);
 				int l = stmt1.executeUpdate();
 				if(l<0){
 					System.out.println("Nope");
 					break;
 				}
+				
+				String str = "insert into Alert(AccountID, AuctionID, Alert) values (" + currentbuy + ", " + auction  + ", 'You won!')";
+				PreparedStatement st = con.prepareStatement(str);
+				int i = st.executeUpdate();
+				if(i>0){
+					continue; // alert successfully added, continue to next auction dub
+				}
+				else{
+					break;
+				}
+				
 			
-			
-			
-			
-			
-			
-			
-			String str = "insert into Alert(AccountID, AuctionID, Alert) values (" + userid + ", " +result.getString("AuctionID") + ", 'You won!')";
-			PreparedStatement st = con.prepareStatement(str);
-			int i = st.executeUpdate();
-			if(i>0){
-				continue;
-			}
-			else{
-				break;
-			}
 				}
 		}
 	}
-		count = 0;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	%>
 	
 	
