@@ -115,9 +115,21 @@
 				}
 		}
 	}
+		
+
 	
-	
-	
+		 String sql2 = "Select * from Alert where AccountID = "+ session.getAttribute("userid");
+		  PreparedStatement stmt2 = con.prepareStatement(sql2);
+		  ResultSet result2 = stmt2.executeQuery(sql2);
+		  if(result2.next()){
+			  %>  
+			   <a> You have a notification! </a>    
+			  <%
+			  
+			  
+			  
+		  }
+		  
 	
 	
 	

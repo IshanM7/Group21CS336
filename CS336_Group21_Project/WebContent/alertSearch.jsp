@@ -54,7 +54,7 @@
 	 		<%}%>
 	 		
 
-
+<input type="button" value="Go Back to home" onclick="window.location='endUserHome.jsp'" />
 
 </body>
 </html>
