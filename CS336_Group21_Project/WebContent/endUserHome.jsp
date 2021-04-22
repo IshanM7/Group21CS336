@@ -29,7 +29,7 @@
 	<%                                                            
 	int userid = (Integer)session.getAttribute("userid");
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "SamiraSamira12!");  
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");  
 	  Date date = new Date();
 	  Timestamp timestamp1 = new Timestamp(date.getTime());
 	  String sql = "Select * from Auction where sold = 0";
