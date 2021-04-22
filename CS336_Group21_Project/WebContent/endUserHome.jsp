@@ -86,7 +86,15 @@
 					
 					}
 					else{
-						continue; //if reserve is higher than last bid continue because no one is winner
+						String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = CurrentBid where AuctionID = ?;";
+						PreparedStatement stmt1 = con.prepareStatement(sql1);
+						stmt1.setInt(1, auction);
+						int l = stmt1.executeUpdate();
+						if(l<0){
+							System.out.println("Nope");
+							break;
+						}
+						continue; //if reserve is higher than last bid then end the auction because no one is winner
 					}
 				}
 				else{ // if there is no reserve 
