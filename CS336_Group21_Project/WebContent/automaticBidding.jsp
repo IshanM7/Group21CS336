@@ -14,17 +14,9 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");
 String view = request.getParameter("AucID");
 String str = "SELECT * FROM Auction WHERE AuctionID = " + view; 
-
-
 Statement st = con.createStatement();
 ResultSet result = st.executeQuery(str);
-
-
-
 out.print("Auc id: "+ view);
-
-
-
 %>
 We here 
 </body>

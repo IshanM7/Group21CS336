@@ -112,6 +112,7 @@
 				 			if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
+				                    <input type="submit" value="Submit"/>		
 				 			<%}%>			                
 					 	</form>
 					 	<br/>

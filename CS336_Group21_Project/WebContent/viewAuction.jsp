@@ -23,7 +23,6 @@
 		
 			//Make an HTML table to show the results in:
 			out.print("<table>");
-
 			//make a row
 			out.print("<tr>");
 			//make a column
@@ -47,7 +46,6 @@
 			out.print("End Date:");
 			out.print("</td>");
 			out.print("</tr>");
-
 			//parse out the results
 			while (result.next()) {
 				//make a row
@@ -76,7 +74,6 @@
 				out.print(result.getString("End Date"));
 				out.print("</td>");
 				out.print("</tr>");
-
 			}
 			out.print("</table>");
 		

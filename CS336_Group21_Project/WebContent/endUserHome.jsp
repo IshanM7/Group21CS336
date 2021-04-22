@@ -38,7 +38,6 @@
 	  ResultSet result = stmt.executeQuery(sql);
 	  
 	  
-
 		while(result.next()){
 			Date temp = new Date();
 			temp.setTime(timestamp1.getTime());
@@ -124,7 +123,6 @@
 		}
 	}
 		
-
 	
 		 String sql2 = "Select * from Alert where AccountID = "+ session.getAttribute("userid");
 		  PreparedStatement stmt2 = con.prepareStatement(sql2);

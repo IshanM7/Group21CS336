@@ -4,6 +4,10 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="java.util.Date"%>
 <%@ page import ="java.text.SimpleDateFormat"%>
+ <%@ page import ="java.sql.Timestamp" %> 
+ <%@ page import ="java.time.LocalDateTime" %> 
+ <%@ page import ="java.time.format.DateTimeFormatter" %> 
+<%@ page import="java.util.Date"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,22 +17,29 @@
 </head>
 <body>
 	<% 
+	
+	
+		
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");
 		double startPrice = Double.parseDouble(request.getParameter("initialPrice"));		
 		double increment =  Double.parseDouble(request.getParameter("increment"));
 		double reserve  = Double.parseDouble(request.getParameter("reserve"));
-		String startDate = "2021/"+request.getParameter("startDate")+" 00:00:00";
-		String endDate = "2021/"+request.getParameter("endDate")+" 00:00:00";
+		
+		Date date = new Date();
+		Timestamp timestamp1 = new Timestamp(date.getTime());
+		String sd = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(timestamp1);		
+		String endTime = request.getParameter("endTime");
+		String startDate = sd;
+		String endDate = "2021/"+request.getParameter("endDate")+" "+endTime;
+		
 		String type = request.getParameter("apparelType");
 		String color = request.getParameter("color");
 		String gender = request.getParameter("gender");
-		String startDate1 = "2021/"+request.getParameter("startDate");
-		String endDate1 = "2021/"+request.getParameter("endDate");
 		int c = 0;
 		
-		Date sDate =new SimpleDateFormat("yyyy/MM/dd").parse(startDate1);  
-		Date eDate =new SimpleDateFormat("yyyy/MM/dd").parse(endDate1);  
+		Date sDate =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(startDate);  
+		Date eDate =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(endDate);  
 		
 		if(eDate.compareTo(sDate) <= 0){
 			out.println("Please choose a date after the starting date, it cannot be the same date <a href='endUserHome.jsp'>Go Home</a>");
