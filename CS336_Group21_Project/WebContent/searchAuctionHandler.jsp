@@ -30,7 +30,6 @@
 		String sql_where = "";
 		sql_sel = "select A.accountid, B.sex, B.type, A.end_date, A.initialprice, A.currentbid, A.ProductID, A.AuctionID, B.color from Auction A, Apparel B";
 		sql_where = " where A.productid = b.productid";		
-			
 		
 		
 		if(category != null){
@@ -96,6 +95,7 @@
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />	
 						 			           <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
+						 			           <input type="Button" value="Bid History" onclick="window.location.replace('bidHistory.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 				             
 				                    
 				                     <input type="submit" value="Submit"/>					 		
@@ -141,6 +141,7 @@
 				 			if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
+			 			           <input type="Button" value="Bid History" onclick="window.location.replace('bidHistory.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 				 					<input type="submit" value="Submit"/>	
 				 			
 				 			<%}%>			                
@@ -153,8 +154,6 @@
 					 		</form>	 
 					 		<br/>
 					 	<% }%>
-			 		
-			 		
 			 		
 			 		<%}else{ %>
 			 		
@@ -185,6 +184,7 @@
 				 			<%if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
+			 			           <input type="Button" value="Bid History" onclick="window.location.replace('bidHistory.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 				                     
 				                     <input type="submit" value="Submit"/>					 		
 				 			<%}%>			                
