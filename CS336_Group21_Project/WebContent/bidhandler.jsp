@@ -18,10 +18,13 @@ double bid = Double.parseDouble(request.getParameter("bid"));
 int auctionID = Integer.parseInt(request.getParameter("aucId"));
 String view = request.getParameter("aucId");
 String str = "SELECT a.CurrentBid as 'Current',a.InitialPrice as 'InitPrice', a.Increment as 'Increment', a.CurrentBuyer as 'CurrBuy' FROM Auction a WHERE a.AuctionID = " + view; 
+
+
 Statement st = con.createStatement();
 ResultSet result = st.executeQuery(str);
 double current=-1;
 double initPrice=0;
+
 int increment=0;
 int currentbuyer = 0;
 if(result.next()){
@@ -29,6 +32,7 @@ currentbuyer = result.getInt("CurrBuy");
 current = result.getDouble("Current");
 initPrice = result.getDouble("InitPrice");
 increment =  result.getInt("Increment");
+
 }
 if(current == 0){	
 	if(bid>=initPrice+increment){
@@ -37,6 +41,17 @@ if(current == 0){
 		stmt.setDouble(1, bid);
 		stmt.setInt(2, (Integer)session.getAttribute("userid"));
 		stmt.setInt(3, auctionID);
+		String addBid = "Insert into Bid(Bid_Price, AccountID, AuctionID) values (" + Double.toString(bid) +", " + session.getAttribute("userid") + ", " + request.getParameter("aucId") +" );";
+		PreparedStatement stmt2 = con.prepareStatement(addBid);
+		int i2 = stmt2.executeUpdate();
+		if(i2>0){
+			System.out.println("Gucci");
+			
+		}
+		else{
+			System.out.println("Nope");
+		}
+		
 		int i = stmt.executeUpdate();
 		
 		if(i>0){
@@ -73,6 +88,16 @@ else if(bid>=current+increment){
 	stmt.setDouble(1, bid);
 	stmt.setInt(2, (Integer)session.getAttribute("userid"));
 	stmt.setInt(3, auctionID);
+	String addBid = "Insert into Bid(Bid_Price, AccountID, AuctionID) values (" + Double.toString(bid) +", " + session.getAttribute("userid") + ", " + request.getParameter("aucId") +" );";
+	PreparedStatement stmt2 = con.prepareStatement(addBid);
+	int i2 = stmt2.executeUpdate();
+	if(i2>0){
+		System.out.println("Gucci");
+		
+	}
+	else{
+		System.out.println("Nope");
+	}
 	int i = stmt.executeUpdate();
 	if(i>0){
 		if(currentbuyer != (Integer)session.getAttribute("userid")){
@@ -108,6 +133,8 @@ else{
 	  </li> 
 	 <% 
 	}
+
+
 %>
 
 </body>
