@@ -85,7 +85,7 @@
 					
 					}
 					else{
-						String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = CurrentBid where AuctionID = ?;";
+						String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = 0 where AuctionID = ?;";
 						PreparedStatement stmt1 = con.prepareStatement(sql1);
 						stmt1.setInt(1, auction);
 						int l = stmt1.executeUpdate();
