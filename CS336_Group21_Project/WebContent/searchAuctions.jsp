@@ -12,25 +12,15 @@
 <body>
 	<h1>Browse and Search</h1>
 </body>
+	<form method="post" action="auctionListing.jsp">
+		Account Lookup: <input required type="number" name = "lookup" placeholder = "Account ID.." oninvalid="this.setCustomValidity('Enter an Integer')" 
+			onchange="this.setCustomValidity('')" />			                   					 								 																				                
+         <input type="submit" value="Submit" />
+	</form>
+	<br>
 	<form method="post" action="searchAuctionHandler.jsp">
-	    <table>
-	             
-                <tr>
-                    <td>Search Auctions</td>                    
-                    <td>                    		
-                    	<select name="category" id="category" required>
-							<option value="">Select category</option>
-							<option value="allAuctions">All Auctions</option>														
-						</select>
-			  		</td>
-			  		
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Submit" /></td>
-                </tr>
-	                  
-	            
-    	</table>
+          
+         <input type="submit" value="View All Auctions" />
 	</form>
 
 	<body>
@@ -61,9 +51,17 @@
 				<button>Search</button>
 				</form>
 				<form action="searchAuctionHandler.jsp">
+				<label for="color">Colors:</label>
 
-				  <label for="color">Color:</label>
-				  <input type="text" id = "color" name = "color" placeholder="Color.." required>
+				<select name="color" required>
+				    <option disabled selected value> -- </option>
+ 					<option value="blue">Blue</option>
+  					<option value="red">Red</option>
+ 					<option value="green">Green</option>
+ 					<option value="black">Black</option>
+  					<option value="white">White</option>
+ 					<option value="pink">Pink</option>
+				</select>
 				<button>Search</button>
 
 				</form>
@@ -86,7 +84,8 @@
 				<button>Search</button>
 				</form>
 		</section>
-		
+
+	<a href='bidHandlerView.jsp'>View Bids</a>
 	<a href='endUserHome.jsp'>Return to Home</a>
 	<a href='logout.jsp'>Log out</a>
 				

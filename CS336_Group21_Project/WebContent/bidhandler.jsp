@@ -18,13 +18,10 @@ double bid = Double.parseDouble(request.getParameter("bid"));
 int auctionID = Integer.parseInt(request.getParameter("aucId"));
 String view = request.getParameter("aucId");
 String str = "SELECT a.CurrentBid as 'Current',a.InitialPrice as 'InitPrice', a.Increment as 'Increment', a.CurrentBuyer as 'CurrBuy' FROM Auction a WHERE a.AuctionID = " + view; 
-
-
 Statement st = con.createStatement();
 ResultSet result = st.executeQuery(str);
 double current=-1;
 double initPrice=0;
-
 int increment=0;
 int currentbuyer = 0;
 if(result.next()){
@@ -32,7 +29,6 @@ currentbuyer = result.getInt("CurrBuy");
 current = result.getDouble("Current");
 initPrice = result.getDouble("InitPrice");
 increment =  result.getInt("Increment");
-
 }
 if(current == 0){	
 	if(bid>=initPrice+increment){
@@ -133,8 +129,6 @@ else{
 	  </li> 
 	 <% 
 	}
-
-
 %>
 
 </body>
