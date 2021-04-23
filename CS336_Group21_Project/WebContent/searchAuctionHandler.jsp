@@ -17,15 +17,44 @@
 		
 		
 		Statement stmt = con.createStatement();
-		String category = request.getParameter("category");
-		String sql = "";
 		int userid = (Integer)session.getAttribute("userid");
 		
-		
-		if(category.equals("allAuctions"))	
-			sql = "SELECT * FROM AUCTION WHERE sold = 0;";
+		Statement stmt1 = con.createStatement();
+		String category = request.getParameter("type");
+		String sex = request.getParameter("sex");
+		String type = request.getParameter("item");
+		String color = request.getParameter("color");
+		String sql1 = "";
+		String sql_sel = "";
+		String sql_order = ";";
+		String sql_where = "";
+		sql_sel = "select A.accountid, B.sex, B.type, A.end_date, A.initialprice, A.currentbid, A.ProductID, A.AuctionID, B.color from Auction A, Apparel B";
+		sql_where = " where A.productid = b.productid";		
 			
-		ResultSet rs = stmt.executeQuery(sql);
+		
+		
+		if(category != null){
+			if(category.equals("price"))	
+				sql_order = " order by A.initialprice;";
+			else if(category.equals("color"))
+				sql_order = " order by B.color;";
+			else if(category.equals("type"))
+				sql_order = " order by B.type;";	
+		}
+		if(sex != null){
+			sql_where+= " and B.sex = '"+sex+"' ";
+		}
+		else if(type != null){
+			sql_where+= " and B.type = '"+type+"' ";
+		}
+		else if(color!= null){
+			sql_where+= " and B.color = '"+color+"' ";
+		}
+			
+		sql1 += sql_sel +sql_where + sql_order;
+		
+			
+		ResultSet rs = stmt.executeQuery(sql1);
 		
 		if(rs.next()){%>
 		
@@ -112,7 +141,8 @@
 				 			if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
 						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
-				                    <input type="submit" value="Submit"/>		
+				 					<input type="submit" value="Submit"/>	
+				 			
 				 			<%}%>			                
 					 	</form>
 					 	<br/>

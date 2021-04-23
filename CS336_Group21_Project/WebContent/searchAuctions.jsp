@@ -37,7 +37,7 @@
 			
 		<section>
 				<h3>Search Item</h3>
-				<form action="sortAuctions.jsp">
+				<form action="searchAuctionHandler.jsp">
 	
 				<label for="sex">Sex:</label>
 
@@ -48,7 +48,7 @@
 				</select>
 				<button>Search</button>
 				</form>
-				<form action="sortAuctions.jsp">
+				<form action="searchAuctionHandler.jsp">
 							
 				<label for="item">Items:</label>
 
@@ -60,7 +60,7 @@
 				</select>
 				<button>Search</button>
 				</form>
-				<form action="sortAuctions.jsp">
+				<form action="searchAuctionHandler.jsp">
 
 				  <label for="color">Color:</label>
 				  <input type="text" id = "color" name = "color" placeholder="Color.." required>
@@ -71,7 +71,7 @@
 		</section>
 		
 		<section>
-			<form action="sortAuctions.jsp">
+			<form action="searchAuctionHandler.jsp">
 			<h3>Sort All Items</h3>
 							
 				<label for="type">Sort by:</label>
@@ -87,7 +87,7 @@
 				</form>
 		</section>
 		
-	<a href='EndUserHome.jsp'>Return to Home</a>
+	<a href='endUserHome.jsp'>Return to Home</a>
 	<a href='logout.jsp'>Log out</a>
 				
 </html>
