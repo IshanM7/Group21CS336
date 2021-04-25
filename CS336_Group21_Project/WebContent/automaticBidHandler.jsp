@@ -10,12 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<%
 	String accountId ;
 	
 	int userid = (Integer)session.getAttribute("userid");
-
 			//Get the database connection
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "password");	
@@ -73,6 +71,8 @@
 		   else if (bidPrice < current+increment){
 			   out.println("Could not set bid. bid value lower than current bid.");
 		   }
+		   else if (limit < bidPrice){
+			   out.println("Could not set bid. Upper limit can not be lower than bid price.");}
 		   
 		  else {
 		   
@@ -199,6 +199,5 @@
 	%>
 	
 	<a href='searchAuctions.jsp'>go Back</a>
-
 </body>
 </html>
