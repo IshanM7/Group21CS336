@@ -13,10 +13,12 @@
 <body>
 	<%
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "Gum50dad"); 
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "password"); 
 		
 		
-		Statement stmt = con.createStatement();
+		  Statement stmt = con.createStatement(
+                  ResultSet.TYPE_SCROLL_INSENSITIVE,
+                  ResultSet.CONCUR_UPDATABLE);		
 		int userid = (Integer)session.getAttribute("userid");
 		
 		Statement stmt1 = con.createStatement();
@@ -28,7 +30,7 @@
 		String sql_sel = "";
 		String sql_order = ";";
 		String sql_where = "";
-		sql_sel = "select A.accountid, B.sex, B.type, A.end_date, A.initialprice, A.currentbid, A.ProductID, A.AuctionID, B.color from Auction A, Apparel B";
+		sql_sel = "select A.accountid, B.sex, B.type, A.end_date, A.initialprice, A.currentbid, A.ProductID, A.AuctionID,A.CurrentBuyer, B.color from Auction A, Apparel B";
 		sql_where = " where A.productid = b.productid and a.sold = 0";		
 		
 		
@@ -81,7 +83,86 @@
 						 			<th>Color</th>
 						 			<th></th>
 						 		</tr>
-					 			
+					 			<% 	String accountId ;
+	String username = session.getAttribute("user").toString();
+	String str5 = " SELECT AccountId FROM Account WHERE Username ='"+username+"' ";
+	PreparedStatement st6 = con.prepareStatement(str5);
+	 ResultSet rsUserName = st6.executeQuery();
+	 
+	 rsUserName.next();
+	  accountId = rsUserName.getString("AccountID");
+	
+	  int auctionP = rs.getInt("AuctionID");
+	  
+	   String str1 = "SELECT * FROM Bid WHERE AuctionID = '"+auctionP+"' ";
+	    PreparedStatement stt = con.prepareStatement(str1);
+	    ResultSet auctionRs = stt.executeQuery();
+	    
+	    String str7 = "SELECT * FROM Bid WHERE AccountID ='"+accountId+"'AND AuctionID = '"+auctionP+"'";
+		PreparedStatement st7 = con.prepareStatement(str7);
+	    ResultSet UserRs = st7.executeQuery();
+	   
+	    double maxBidPrice;
+	    int accountID = Integer.parseInt(accountId);
+	    
+	    if (auctionRs.next() && UserRs.next() ){ 
+	    	
+	    	String str8 = "SELECT MAX(Bid_Price)Bid_price from Bid WHERE AuctionID = "+auctionP+"";
+    	    PreparedStatement st8 = con.prepareStatement(str8);
+    	    ResultSet UserRs2 = st8.executeQuery();
+    	    UserRs2.next();
+    	    maxBidPrice = UserRs2.getDouble("Bid_price");
+    	    
+    	    
+    	    int userIncrement = UserRs.getInt("bidIncrement");
+    	    double userBid = UserRs.getDouble("Bid_Price");
+    	    double userUpperLimit = UserRs.getDouble("Upper_Limit");
+    	    
+    	    if (maxBidPrice > userUpperLimit)
+    	    {
+    	      String s = "Someone have bidded higher than your upper limit on auction " + auctionP;
+    	     
+    	    String str3 = "SELECT * FROM Alert WHERE AccountID ='"+userid+"'AND AuctionID = '"+auctionP+"'";
+  	    	PreparedStatement st3 = con.prepareStatement(str3);
+  	    	ResultSet auctionRsalert = st3.executeQuery();
+  	    
+  	    
+    	         if(! auctionRsalert.next()){
+    	        	out.println("You have a new alert on auction "+auctionP);
+    	        	
+		    		String str2 = "INSERT INTO Alert VALUES ('"+userid+"','"+auctionP+"','"+s+"')";
+		    		PreparedStatement st2 = con.prepareStatement(str2);
+		    		st2.executeUpdate();
+    	         	}
+		    	
+  	   	 	}
+    	    
+    	    if (userBid < maxBidPrice && maxBidPrice < userUpperLimit ){
+    			double newBid = maxBidPrice + userIncrement;
+    			String str9 = "UPDATE Bid SET Bid_Price ='"+newBid+"' WHERE AuctionID ='"+auctionP+"'AND AccountID ='"+accountId+"' ";
+	    	    PreparedStatement st9 = con.prepareStatement(str9);
+	    	    
+	    	    if(st9.executeUpdate()>0){
+	    	    	String sql2 = "UPDATE Auction SET CurrentBid = ?, CurrentBuyer = ? WHERE AuctionID = ?;";
+			 		  PreparedStatement stmt2 = con.prepareStatement(sql2);
+				   		stmt2.setDouble(1, newBid);
+						stmt2.setInt(2, userid);
+						stmt2.setInt(3, auctionP);
+						if (stmt2.executeUpdate()>0)
+							out.println("Current bid have been updated. refresh the page");
+	    	    		out.println(" \n Bid updated on auction  "+auctionP);
+						//rs.updateDouble( "A.currentbid", newBid );
+						//rs.updateDouble( "A.CurrentBuyer", userid );
+				       //  rs.updateRow();
+	    	    }
+	    	    
+	    	    
+    			
+    		}
+    	    
+	    }
+	     
+	    %>
 					 			<tr>
 					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Shirt </a>"); %></td>
@@ -129,7 +210,86 @@
 						 			<th>Color</th>
 						 			<th></th>
 						 		</tr>
-					 			
+					 			<% 	String accountId ;
+	String username = session.getAttribute("user").toString();
+	String str5 = " SELECT AccountId FROM Account WHERE Username ='"+username+"' ";
+	PreparedStatement st6 = con.prepareStatement(str5);
+	 ResultSet rsUserName = st6.executeQuery();
+	 
+	 rsUserName.next();
+	  accountId = rsUserName.getString("AccountID");
+	
+	  int auctionP = rs.getInt("AuctionID");
+	  
+	   String str1 = "SELECT * FROM Bid WHERE AuctionID = '"+auctionP+"' ";
+	    PreparedStatement stt = con.prepareStatement(str1);
+	    ResultSet auctionRs = stt.executeQuery();
+	    
+	    String str7 = "SELECT * FROM Bid WHERE AccountID ='"+accountId+"'AND AuctionID = '"+auctionP+"'";
+		PreparedStatement st7 = con.prepareStatement(str7);
+	    ResultSet UserRs = st7.executeQuery();
+	   
+	    double maxBidPrice;
+	    int accountID = Integer.parseInt(accountId);
+	    
+	    if (auctionRs.next() && UserRs.next() ){ 
+	    	
+	    	String str8 = "SELECT MAX(Bid_Price)Bid_price from Bid WHERE AuctionID = "+auctionP+"";
+    	    PreparedStatement st8 = con.prepareStatement(str8);
+    	    ResultSet UserRs2 = st8.executeQuery();
+    	    UserRs2.next();
+    	    maxBidPrice = UserRs2.getDouble("Bid_price");
+    	    
+    	    
+    	    int userIncrement = UserRs.getInt("bidIncrement");
+    	    double userBid = UserRs.getDouble("Bid_Price");
+    	    double userUpperLimit = UserRs.getDouble("Upper_Limit");
+    	    
+    	    if (maxBidPrice > userUpperLimit)
+    	    {
+    	      String s = "Someone have bidded higher than your upper limit on auction " + auctionP;
+    	     
+    	    String str3 = "SELECT * FROM Alert WHERE AccountID ='"+userid+"'AND AuctionID = '"+auctionP+"'";
+  	    	PreparedStatement st3 = con.prepareStatement(str3);
+  	    	ResultSet auctionRsalert = st3.executeQuery();
+  	    
+  	    
+    	         if(! auctionRsalert.next()){
+    	        	out.println("You have a new alert on auction "+auctionP);
+    	        	
+		    		String str2 = "INSERT INTO Alert VALUES ('"+userid+"','"+auctionP+"','"+s+"')";
+		    		PreparedStatement st2 = con.prepareStatement(str2);
+		    		st2.executeUpdate();
+    	         	}
+		    	
+  	   	 	}
+    	    
+    	    if (userBid < maxBidPrice && maxBidPrice < userUpperLimit ){
+    			double newBid = maxBidPrice + userIncrement;
+    			String str9 = "UPDATE Bid SET Bid_Price ='"+newBid+"' WHERE AuctionID ='"+auctionP+"'AND AccountID ='"+accountId+"' ";
+	    	    PreparedStatement st9 = con.prepareStatement(str9);
+	    	    
+	    	    if(st9.executeUpdate()>0){
+	    	    	String sql2 = "UPDATE Auction SET CurrentBid = ?, CurrentBuyer = ? WHERE AuctionID = ?;";
+			 		  PreparedStatement stmt2 = con.prepareStatement(sql2);
+				   		stmt2.setDouble(1, newBid);
+						stmt2.setInt(2, userid);
+						stmt2.setInt(3, auctionP);
+						if (stmt2.executeUpdate()>0)
+	    	    		out.println(" \n Bid updated on auction  "+auctionP);
+						out.println("Current bid have been updated. refresh the page");
+						//rs.updateDouble( "A.currentbid", newBid );
+						//rs.updateDouble( "A.CurrentBuyer", userid );
+				        // rs.updateRow();
+	    	    }
+	    	    
+	    	    
+    			
+    		}
+    	    
+	    }
+	     
+	    %>
 					 			<tr>
 					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Pants </a>"); %></td>
@@ -178,7 +338,86 @@
 						 			<th>Color</th>
 						 			<th></th>
 						 		</tr>
-					 			
+					 			<% 	String accountId ;
+	String username = session.getAttribute("user").toString();
+	String str5 = " SELECT AccountId FROM Account WHERE Username ='"+username+"' ";
+	PreparedStatement st6 = con.prepareStatement(str5);
+	 ResultSet rsUserName = st6.executeQuery();
+	 
+	 rsUserName.next();
+	  accountId = rsUserName.getString("AccountID");
+	
+	  int auctionP = rs.getInt("AuctionID");
+	  
+	   String str1 = "SELECT * FROM Bid WHERE AuctionID = '"+auctionP+"' ";
+	    PreparedStatement stt = con.prepareStatement(str1);
+	    ResultSet auctionRs = stt.executeQuery();
+	    
+	    String str7 = "SELECT * FROM Bid WHERE AccountID ='"+accountId+"'AND AuctionID = '"+auctionP+"'";
+		PreparedStatement st7 = con.prepareStatement(str7);
+	    ResultSet UserRs = st7.executeQuery();
+	   
+	    double maxBidPrice;
+	    int accountID = Integer.parseInt(accountId);
+	    
+	    if (auctionRs.next() && UserRs.next() ){ 
+	    	
+	    	String str8 = "SELECT MAX(Bid_Price)Bid_price from Bid WHERE AuctionID = "+auctionP+"";
+    	    PreparedStatement st8 = con.prepareStatement(str8);
+    	    ResultSet UserRs2 = st8.executeQuery();
+    	    UserRs2.next();
+    	    maxBidPrice = UserRs2.getDouble("Bid_price");
+    	    
+    	    
+    	    int userIncrement = UserRs.getInt("bidIncrement");
+    	    double userBid = UserRs.getDouble("Bid_Price");
+    	    double userUpperLimit = UserRs.getDouble("Upper_Limit");
+    	    
+    	    if (maxBidPrice > userUpperLimit)
+    	    {
+    	      String s = "Someone have bidded higher than your upper limit on auction " + auctionP;
+    	     
+    	    String str3 = "SELECT * FROM Alert WHERE AccountID ='"+userid+"'AND AuctionID = '"+auctionP+"'";
+  	    	PreparedStatement st3 = con.prepareStatement(str3);
+  	    	ResultSet auctionRsalert = st3.executeQuery();
+  	    
+  	    
+    	         if(! auctionRsalert.next()){
+    	        	out.println("You have a new alert on auction "+auctionP);
+    	        	
+		    		String str2 = "INSERT INTO Alert VALUES ('"+userid+"','"+auctionP+"','"+s+"')";
+		    		PreparedStatement st2 = con.prepareStatement(str2);
+		    		st2.executeUpdate();
+    	         	}
+		    	
+  	   	 	}
+    	    
+    	    if (userBid < maxBidPrice && maxBidPrice < userUpperLimit ){
+    			double newBid = maxBidPrice + userIncrement;
+    			String str9 = "UPDATE Bid SET Bid_Price ='"+newBid+"' WHERE AuctionID ='"+auctionP+"'AND AccountID ='"+accountId+"' ";
+	    	    PreparedStatement st9 = con.prepareStatement(str9);
+	    	    
+	    	    if(st9.executeUpdate()>0){
+	    	    	String sql2 = "UPDATE Auction SET CurrentBid = ?, CurrentBuyer = ? WHERE AuctionID = ?;";
+			 		  PreparedStatement stmt2 = con.prepareStatement(sql2);
+				   		stmt2.setDouble(1, newBid);
+						stmt2.setInt(2, userid);
+						stmt2.setInt(3, auctionP);
+						if (stmt2.executeUpdate()>0)
+	    	    		out.println(" \n Bid updated on auction  "+auctionP);
+						out.println("Current bid have been updated. refresh the page");
+						//rs.updateDouble( "A.currentbid", newBid );
+						//rs.updateDouble( "A.CurrentBuyer", userid );
+				        // rs.updateRow();
+	    	    }
+	    	    
+	    	    
+    			
+    		}
+    	    
+	    }
+	     
+	    %>
 					 			<tr>
 					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Shoes </a>"); %></td>
