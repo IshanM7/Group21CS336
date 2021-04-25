@@ -21,10 +21,13 @@
 	
 		
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "Gum50dad");
+	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");
 		double startPrice = Double.parseDouble(request.getParameter("initialPrice"));		
 		double increment =  Double.parseDouble(request.getParameter("increment"));
-		double reserve  = Double.parseDouble(request.getParameter("reserve"));
+		double reserve = 0;
+		if(request.getParameter("reserve") != ""){
+			reserve  = Double.parseDouble(request.getParameter("reserve"));
+		}
 		
 		Date date = new Date();
 		Timestamp timestamp1 = new Timestamp(date.getTime());
