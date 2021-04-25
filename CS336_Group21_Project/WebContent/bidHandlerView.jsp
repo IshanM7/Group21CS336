@@ -15,7 +15,7 @@
 <body>
 	<%
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001"); 
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "Gum50dad"); 
 		
 		
 		Statement stmt = con.createStatement();
@@ -50,6 +50,8 @@
 					}
 					%>
 					 		</table>
+	<a href='endUserHome.jsp'>Return to Home</a>
+	<a href='logout.jsp'>Log out</a>
 				</body>
 				</html>		
 
