@@ -173,7 +173,7 @@
     	       			 }
 	    	    
 	    	 	 		 if (bidPrice > maxBidPrice && maxBidPrice < limit ){
-	    				double newBid = bidPrice + bidIncrement;
+	    				double newBid = bidPrice;
 	    				String str2 = "INSERT INTO Bid(Upper_Limit, Bid_Price, AccountID, AuctionID,bidIncrement) VALUES ('"+limit+"','"+newBid+"','"+accountId+"','"+auctionP+"','"+bidIncrement+"')";		    	    
 	    				PreparedStatement st9 = con.prepareStatement(str2);
 		    	    	
