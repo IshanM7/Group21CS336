@@ -23,7 +23,12 @@
          <input type="submit" value="View All Auctions" />
 	</form>
 
+
 	<body>
+	<form method="post" action="alertValues.jsp">
+          
+         <input type="submit" value="Set Alert" />
+	</form>
 			
 		<section>
 				<h3>Search Item</h3>
