@@ -1,4 +1,4 @@
-Names: Ishan Mody, Michael Elkhouri, Goutham Ummetalla, Tankpinou Pandou
+Names: Ishan Mody, Michael Elkhouri, Goutham Ummetalla, Tankpinou Padonou
 
 Admin Credentials:
 	Username: admin
