@@ -198,7 +198,7 @@
 	
 	%>
 	
-	<a href='searchAuctionHandler.jsp'>go Back</a>
+	<a href='searchAuctions.jsp'>go Back</a>
 
 </body>
 </html>

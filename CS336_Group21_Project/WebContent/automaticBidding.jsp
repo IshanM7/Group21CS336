@@ -29,19 +29,19 @@ userid = (Integer)session.getAttribute("userid");
 
 <form method="get" action="automaticBidHandler.jsp">
 <tr>
-	      <td>Set an automatic bid increment: <input type="text" name="bidIncrement"/></td>
+	      <td>Set an automatic bid increment: <input type="text" name="bidIncrement" required/></td>
 	     
 		</tr>
 <tr>
    		
-	      <td>Set a upper limit: <input type="text" name="upperLimit"/></td>
-	      <td>Set a Bid Price: <input type="text" name="bidPrice"/></td>
+	      <td>Set a upper limit: <input type="text" name="upperLimit" required/></td>
+	      <td>Set a Bid Price: <input type="text" name="bidPrice" required/></td>
    		</tr>
 		<input type="submit" value="Set your Bid">
 	</form>
 
 
-<a href='endUserHome.jsp'>go Back</a>
+<a href='searchAuctions.jsp'>go Back</a>
 
 </body>
 </html>
