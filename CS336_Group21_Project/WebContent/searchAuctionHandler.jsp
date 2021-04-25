@@ -13,7 +13,7 @@
 <body>
 	<%
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001"); 
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "Gum50dad"); 
 		
 		
 		Statement stmt = con.createStatement();
@@ -29,7 +29,7 @@
 		String sql_order = ";";
 		String sql_where = "";
 		sql_sel = "select A.accountid, B.sex, B.type, A.end_date, A.initialprice, A.currentbid, A.ProductID, A.AuctionID, B.color from Auction A, Apparel B";
-		sql_where = " where A.productid = b.productid";		
+		sql_where = " where A.productid = b.productid and a.sold = 0";		
 		
 		
 		if(category != null){
@@ -64,13 +64,15 @@
 			    st.setInt(1,PID);
 			    ResultSet product = st.executeQuery();
 			    product.next();				
-			%>		 		
+%>
+			
 		 			<%if(product.getString("type").equals("shirt")){ 	%>		 					 		
 				 		<form method = "post" action = "bidhandler.jsp?aucId=<%=rs.getInt("AuctionID")%>">		 					 			
 					 		<table>
 						 		<tr>
 						 			<th>Auction ID</th>
 						 			<th>Type</th>
+						 			<th>Sex</th>
 						 			<th>End Date</th>
 						 			<th>Initial Price</th>											 							 			
 						 			<th>CurrentBid</th>
@@ -83,6 +85,7 @@
 					 			<tr>
 					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Shirt </a>"); %></td>
+					 				<td style="text-align:center"><%out.println((rs.getString("Sex"))); %></td>
 					 				<td style="text-align:center"><%out.println((rs.getString("End_Date")).substring(5,10)); %></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("InitialPrice"));%></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("CurrentBid"));%></td>
@@ -96,6 +99,7 @@
 						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />	
 						 			           <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 						 			           <input type="Button" value="Bid History" onclick="window.location.replace('bidHistory.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
+						 			           <input type="Button" value="Look For Similar Items" onclick="window.location.replace('similarityChecker.jsp?typeid=<%=rs.getString("type")%>&sexid=<%=rs.getString("sex")%>&color=<%=rs.getString("color")%>&aucid=<%=rs.getString("auctionID")%>')"/>				                     
 				             
 				                    
 				                     <input type="submit" value="Submit"/>					 		
@@ -116,6 +120,7 @@
 						 		<tr>
 						 			<th>Auction ID</th>
 						 			<th>Type</th>
+						 			<th>Sex</th>
 						 			<th>End Date</th>
 						 			<th>Initial Price</th>											 							 			
 						 			<th>CurrentBid</th>
@@ -128,6 +133,7 @@
 					 			<tr>
 					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Pants </a>"); %></td>
+					 				<td style="text-align:center"><%out.println((rs.getString("Sex"))); %></td>
 					 				<td style="text-align:center"><%out.println((rs.getString("End_Date")).substring(5,10)); %></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("InitialPrice"));%></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("CurrentBid"));%></td>
@@ -139,9 +145,11 @@
 					 		</table>
 				 				<% 
 				 			if((Integer)session.getAttribute("userid") != rs.getInt("AccountID") && (Integer)session.getAttribute("role") == 3) {%>					 									 								 									 									 									 			
-						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
+						 			Place Bid: <input type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />		
+						 				                   					 								 																				                
 				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 			 			           <input type="Button" value="Bid History" onclick="window.location.replace('bidHistory.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
+						 			           <input type="Button" value="Look For Similar Items" onclick="window.location.replace('similarityChecker.jsp?typeid=<%=rs.getString("type")%>&sexid=<%=rs.getString("sex")%>&color=<%=rs.getString("color")%>&aucid=<%=rs.getString("auctionID")%>')"/>				                     
 				 					<input type="submit" value="Submit"/>	
 				 			
 				 			<%}%>			                
@@ -162,6 +170,7 @@
 						 		<tr>
 						 			<th>Auction ID</th>
 						 			<th>Type</th>
+						 			<th>Sex</th>
 						 			<th>End Date</th>
 						 			<th>Initial Price</th>											 							 			
 						 			<th>CurrentBid</th>
@@ -173,6 +182,7 @@
 					 			<tr>
 					 				<td><%out.println(rs.getInt("AuctionID")); %> </td>
 					 				<td><%out.println("<a> Shoes </a>"); %></td>
+					 				<td style="text-align:center"><%out.println((rs.getString("Sex"))); %></td>
 					 				<td style="text-align:center"><%out.println((rs.getString("End_Date")).substring(5,10)); %></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("InitialPrice"));%></td>
 					 				<td style="text-align:center"><% out.println(rs.getDouble("CurrentBid"));%></td>
@@ -185,7 +195,7 @@
 						 			Place Bid: <input required type="number" name = "bid" min = <%=rs.getDouble("CurrentBid")%> step = ".01" />			                   					 								 																				                
 				                    <input type="Button" value="Set up Automatic Bidding" onclick="window.location.replace('automaticBidding.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
 			 			           <input type="Button" value="Bid History" onclick="window.location.replace('bidHistory.jsp?AucID=<%=rs.getInt("AuctionID")%>')"/>
-				                     
+						 			           <input type="Button" value="Look For Similar Items" onclick="window.location.replace('similarityChecker.jsp?typeid=<%=rs.getString("type")%>&sexid=<%=rs.getString("sex")%>&color=<%=rs.getString("color")%>&aucid=<%=rs.getString("auctionID")%>')"/>				                     
 				                     <input type="submit" value="Submit"/>					 		
 				 			<%}%>			                
 					 	</form>
@@ -203,5 +213,10 @@
 		<%}while(rs.next()); 
 		}
 		%>
+			
+				<a href='bidHandlerView.jsp'>View Bids</a>
+		<a href='endUserHome.jsp'>Return to Home</a>
+		<a href='logout.jsp'>Log out</a>
+	
 </body>
 </html>
