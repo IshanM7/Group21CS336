@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Auction Listing</title>
 
 
 </head>
@@ -39,7 +39,6 @@
 					 				<td><% out.println(rs.getInt("Accountid"));%></td>
 					 			</tr>
 <%
-
 					}while(rs.next()); 
 					}
 		if(x == 0){%>			
@@ -47,7 +46,6 @@
 		
 		<%
 			}
-
 					%>
 					 		</table>
 					<a href='searchAuctions.jsp'>Return to Browse</a>
@@ -55,5 +53,3 @@
 	<a href='logout.jsp'>Log out</a>
 				</body>
 				</html>		
-
-		

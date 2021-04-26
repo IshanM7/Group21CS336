@@ -40,6 +40,7 @@
 			            
 		    	</table>
 			</form>
+			
 		<%} else { %>
 		
 			<form method="post" action="endUserQuestionPage.jsp">
@@ -71,7 +72,8 @@
 		<%} %>
 		
 	
-	
+	<a href='endUserHome.jsp'>Return to Home</a>
+	<a href='logout.jsp'>Log out</a>
 	
 
 </body>

@@ -97,14 +97,30 @@ else if(bid>=current+increment){
 	int i = stmt.executeUpdate();
 	if(i>0){
 		if(currentbuyer != (Integer)session.getAttribute("userid")){
-			String alert = "Insert into Alert(AccountID, AuctionID, Alert) values ("+currentbuyer+", "+auctionID+", 'You have been outbid!')";
-			PreparedStatement stmt1 = con.prepareStatement(alert);
-			int i1 = stmt1.executeUpdate();
-			if(i1>0){
-				System.out.println("Worked");
-			}
-			else{
-				System.out.println(alert);
+			Statement c = con.createStatement();			
+			String check = "Select * FROM Alert WHERE AuctionId = "+auctionID+" AND AccountID = "+currentbuyer+";";
+			ResultSet rs = c.executeQuery(check);
+			if(rs.next()){
+				String update = "UPDATE Alert SET Alert = 'You have been outbid again' WHERE AccountId = "+currentbuyer+" AND AuctionID = "+auctionID+";";
+				Statement up = con.createStatement();
+				int err = up.executeUpdate(update);
+				if(err > 0){
+					System.out.println("Worked");
+				}
+				else{
+					System.out.println("Failed");				
+				}
+			}else{
+				
+				String alert = "Insert into Alert(AccountID, AuctionID, Alert) values ("+currentbuyer+", "+auctionID+", 'You have been outbid!')";
+				PreparedStatement stmt1 = con.prepareStatement(alert);
+				int i1 = stmt1.executeUpdate();
+				if(i1>0){
+					System.out.println("Worked");
+				}
+				else{
+					System.out.println(alert);
+				}
 			}
 		}
 		%>Bid Placed!
@@ -129,6 +145,17 @@ else{
 	  </li> 
 	 <% 
 	}
+
+int role = (Integer)session.getAttribute("role");
+if(role == 1){
+	out.println("<a href='adminHome.jsp'>Go Home</a>");
+}
+if(role == 2){
+	out.println("<a href='customerRepHome.jsp'>Go Home</a>");
+}
+if(role == 3){
+	out.println("<a href='endUserHome.jsp'>Go Home</a>");
+}
 %>
 
 </body>

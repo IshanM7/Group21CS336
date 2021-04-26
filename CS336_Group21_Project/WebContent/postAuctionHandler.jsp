@@ -21,10 +21,13 @@
 	
 		
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "Gum50dad");
+	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");
 		double startPrice = Double.parseDouble(request.getParameter("initialPrice"));		
 		double increment =  Double.parseDouble(request.getParameter("increment"));
-		double reserve  = Double.parseDouble(request.getParameter("reserve"));
+		double reserve = 0;
+		if(request.getParameter("reserve") != ""){
+			reserve  = Double.parseDouble(request.getParameter("reserve"));
+		}
 		
 		Date date = new Date();
 		Timestamp timestamp1 = new Timestamp(date.getTime());
@@ -47,7 +50,6 @@
 			out.println("Please choose a date after the starting date, it cannot be the same date <a href='endUserHome.jsp'>Go Home</a>");
 			c++;
 		}
-
 		if(c == 0){
 			
 			if(type.equals("shirt")){
@@ -91,7 +93,7 @@
 						}
 						
 						
-						out.println("Auction Added <a href='endUserHome.jsp'>Go Home</a>"); 
+						out.println("Auction Added"); 
 					}else{
 						out.println("Could not add Auction<a href='endUserHome.jsp'>Go Home</a>");	
 					}
@@ -140,7 +142,7 @@
 							while(rs.next());
 						}
 						
-						out.println("Auction Added <a href='endUserHome.jsp'>Go Home</a>"); 
+						out.println("Auction Added"); 
 					}else{
 						out.println("Could not add Auction<a href='endUserHome.jsp'>Go Home</a>");	
 					}
@@ -186,7 +188,7 @@
 							while(rs.next());
 						}
 						
-						out.println("Auction Added <a href='endUserHome.jsp'>Go Home</a>"); 
+						out.println("Auction Added"); 
 					}else{
 						out.println("Could not add Auction<a href='endUserHome.jsp'>Go Home</a>");	
 					}

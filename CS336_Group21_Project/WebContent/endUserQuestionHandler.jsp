@@ -35,7 +35,7 @@
 		}
 		
 		
-		out.println("<a>"+questionText+"</a>");
+		
 		
 	%>
 

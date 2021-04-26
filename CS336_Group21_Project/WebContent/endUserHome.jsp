@@ -55,8 +55,11 @@
 				int reserve = result.getInt("Reserve");
 				double currentB = result.getDouble("CurrentBid");
 				int auction = result.getInt("AuctionID");
+				System.out.println("reserve: "+reserve);
+				System.out.println("currentB: "+currentB);
 				if(reserve != 0){
 					if(currentB>=reserve){
+
 						String sql1 = "UPDATE Auction SET Sold = 1, WinningBid = CurrentBid where AuctionID = ?;";
 						PreparedStatement stmt1 = con.prepareStatement(sql1);
 						stmt1.setInt(1, auction);
@@ -65,14 +68,33 @@
 							System.out.println("Nope");
 							break;
 						}
-						String str = "insert into Alert(AccountID, AuctionID, Alert) values (" + currentbuy + ", " + auction  + ", 'You won!')";
-						PreparedStatement st = con.prepareStatement(str);
-						int i = st.executeUpdate();
-						if(i>0){
-							continue; // alert successfully added, continue to next auction dub
-						}
-						else{
-							break;
+						
+						
+						
+						Statement c = con.createStatement();			
+						String check = "Select * FROM Alert WHERE AuctionId = "+auction+" AND AccountID = "+currentbuy+";";
+						ResultSet rs = c.executeQuery(check);
+						if(rs.next()){
+							String update = "UPDATE Alert SET Alert = 'You won!' WHERE AccountId = "+currentbuy+" AND AuctionID = "+auction+";";
+							Statement up = con.createStatement();
+							int err = up.executeUpdate(update);
+							if(err > 0){
+								System.out.println("Worked");
+							}
+							else{
+								System.out.println("Failed");				
+							}																		
+							
+						}else{
+							String str = "insert into Alert(AccountID, AuctionID, Alert) values (" + currentbuy + ", " + auction  + ", 'You won!')";
+							PreparedStatement st = con.prepareStatement(str);
+							int i = st.executeUpdate();
+							if(i>0){
+								continue; // alert successfully added, continue to next auction dub
+							}
+							else{
+								break;
+							}
 						}
 					
 					

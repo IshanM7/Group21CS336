@@ -5,9 +5,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<style>
+		table,td, th{
+		  border: 1px solid black;
+		  width: 40%
+		}
+		
+		table {
+		  border-collapse: collapse;
+		  
+		}
+		
+		td {
+		  text-align: center;
+		}
+	</style>
+
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="style.css"/>
+	
 </head>
 <body>
 
@@ -115,7 +133,8 @@
 			
 	<%} %>
 		
-		
+	<a href='endUserHome.jsp'>Return to Home</a>
+	<a href='logout.jsp'>Log out</a>
 		
 </body>
 </html>

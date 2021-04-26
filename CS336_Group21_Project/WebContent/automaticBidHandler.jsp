@@ -16,7 +16,7 @@
 	int userid = (Integer)session.getAttribute("userid");
 			//Get the database connection
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "password");	
+		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");	
 		
 		    // get accountID
 		String username = session.getAttribute("user").toString();
@@ -173,7 +173,7 @@
     	       			 }
 	    	    
 	    	 	 		 if (bidPrice > maxBidPrice && maxBidPrice < limit ){
-	    				double newBid = bidPrice;
+	    				double newBid = bidPrice + bidIncrement;
 	    				String str2 = "INSERT INTO Bid(Upper_Limit, Bid_Price, AccountID, AuctionID,bidIncrement) VALUES ('"+limit+"','"+newBid+"','"+accountId+"','"+auctionP+"','"+bidIncrement+"')";		    	    
 	    				PreparedStatement st9 = con.prepareStatement(str2);
 		    	    	

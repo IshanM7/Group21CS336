@@ -9,11 +9,12 @@
 </head>
 <body>
 
+	<h2>Edit Account</h2>
 	<form action="customerRepEditAccountHandler.jsp" method="POST">
 	   <table>
 	   		<tr>
 	   			
-		       <td>Account ID: <input type="number" name="accountID" required/></td>
+		       <td>Account ID: <input type="number" name="accountID" min = 0 required/></td>
 	   		</tr>
 	   		<tr>
 	   			
@@ -33,13 +34,23 @@
 	   		</tr>
 	   		<tr>
 	   			<td><input type="submit" value="Submit"/></td>	   			
-	   		</tr>
-	
-		       
-		       
-		     
+	   		</tr>		      		     
 	    </table>
      </form>
-
+	</br>
+	<h2>Delete Account</h2>
+	<form action="deleteAccount.jsp" method="POST">
+	   <table>
+	   		<tr>
+	   			
+		       <td>Account ID: <input type="number" name="accountID" min = 0 required/></td>
+	   		</tr>	   		
+	   		<tr>
+	   			<td><input type="submit" value="Submit"/></td>	   			
+	   		</tr>		      		     
+	    </table>
+     </form>
+     </br>
+	<a href='customerRepHome.jsp'>Return Home</a>
 </body>
 </html>

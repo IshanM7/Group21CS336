@@ -6,9 +6,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+		table,td, th{
+		  border: 1px solid black;
+		  width: 80%
+		}
+		
+		table {
+		  border-collapse: collapse;
+		  
+		}
+		
+		td {
+		  text-align: center;
+		}
+	</style>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 	<%	
@@ -72,7 +86,7 @@
 				out.println("No questions related to "+category+"<a href='customerRepHome.jsp'>Go Home</a>");
 			}%>
 		
-
+		<a href='customerRepHome.jsp'>Return Home</a>
 		 		 
 	
 

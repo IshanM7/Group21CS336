@@ -15,7 +15,7 @@
 <body>
 	<%
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "Gum50dad"); 
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001"); 
 		String view = request.getParameter("AucID");
 		
 		
@@ -42,12 +42,18 @@
 					 				<td> <%out.println((rs.getInt("Auctionid"))); %></td>
 					 				<td> <% out.println(rs.getDouble("Bid_Price"));%></td>
 					 				<td><% out.println(rs.getInt("Accountid"));%></td>
+					 				<td>
+					 					<%if((Integer)session.getAttribute("role") < 3){ %>
+						 					<form action = "deleteBid.jsp?bid=<%=(Integer)rs.getInt("BidID")%>&price=<%=(Integer)rs.getInt("Bid_Price")%>&aid=<%=rs.getInt("Auctionid") %>" method = "POST">
+						 						<input type="submit" value="Delete bid" /></a>
+						 					</form>	
+						 				<%} %>
+					 				</td>
 					 			</tr>
 					 			
 				                
 					
 					<%
-
 					}while(rs.next()); 
 					}
 		if(x == 0){%>			
@@ -56,10 +62,21 @@
 		<%
 			}
 					%>
-					 		</table>
-	<a href='endUserHome.jsp'>Return to Home</a>
-	<a href='logout.jsp'>Log out</a>
-				</body>
-				</html>		
-
-		
+	 		</table>
+	 		
+	 		<%
+	 		int role = (Integer)session.getAttribute("role");
+			if(role == 1){
+				out.println("<a href='adminHome.jsp'>Go Home</a>");
+			}
+			if(role == 2){
+				out.println("<a href='customerRepHome.jsp'>Go Home</a>");
+			}
+			if(role == 3){
+				out.println("<a href='endUserHome.jsp'>Go Home</a>");
+			}
+	 		%>
+	 	<a href='logout.jsp'>Log out</a>
+	 		
+</body>
+</html>	

@@ -11,20 +11,16 @@
 <body>
 <%
 Class.forName("com.mysql.jdbc.Driver").newInstance();
-Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "password");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/336Project","root", "ishan2001");
 String view = request.getParameter("AucID");
 String str = "SELECT * FROM Auction WHERE AuctionID = " + view; 
-
 out.print("Auc id: "+ view+"\n");
 int auctionID = Integer.parseInt(view);
 session.setAttribute("auctionId", auctionID);
 int userid = (Integer)session.getAttribute("userid");
 out.print("Account id: "+ userid);
-
 String accountId ;
-
 userid = (Integer)session.getAttribute("userid");
-
   %> 
 
 <form method="get" action="automaticBidHandler.jsp">

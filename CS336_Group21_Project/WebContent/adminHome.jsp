@@ -15,7 +15,7 @@
 	<ul>
 		<li><a href="generateSalesReports.jsp">Generate sales reports</a></li>
 		<li><a href="customerRepRegister.jsp">Create a customer rep account</a>	</li>
-		<li><a href="allAuctions.jsp">Cancel an auction</a></li>
+		<li><a href='searchAuctions.jsp'>Search Auctions</a></li>
 		<li><a href='logout.jsp'>Log out</a></li>
 	</ul>
 </body>

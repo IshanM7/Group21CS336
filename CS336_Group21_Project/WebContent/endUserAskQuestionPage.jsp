@@ -39,6 +39,7 @@
           </table>
 </form>
 
-
+<a href='endUserHome.jsp'>Return to Home</a>
+<a href='logout.jsp'>Log out</a>
 </body>
 </html>

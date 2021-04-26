@@ -17,7 +17,7 @@
 			<form action = "postAuctionHandler.jsp?apparelType=<%=type%>&gender=<%=gender%>" method = "POST">
 				Starting Price(Max 9999):<input type="number" step="0.01" min = "0.00" name="initialPrice" required/><br/>
 				Increment:<input type="number" step="0.01" min = "0.00" name="increment"required/><br/>
-				Reserve(Your min selling price, hidden from buyer):<input type="number" step="0.01" min = "0.00" name="reserve" required/><br/>
+				Reserve(Your min selling price, hidden from buyer, optional):<input type="number" step="0.01" min = "0.00" name="reserve" default = 0><br/>
         		End Date(MM/DD):<input required type="date" name="endDate" pattern="(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"/><br/>
         		End Time(HH:MM:SS):<input required type = "time" name="endTime" placeholder = "HH:MM:SS" pattern = "^([0-1]\d|2[0-3]):([0-5]\d):([0-5]\d)$"><br/>
 				<h2>Shirt Info</h2>
@@ -61,7 +61,7 @@
 				<form action = "postAuctionHandler.jsp?apparelType=<%=type%>&gender=<%=gender%>" method = "POST">
 					Starting Price(Max 9999):<input type="number" step="0.01" min = "0.00" name="initialPrice" required/><br/>
 					Increment:<input type="number" step="0.01" min = "0.00" name="increment"required/><br/>
-					Reserve(Your min selling price, hidden from buyer):<input type="number" step="0.01" min = "0.00" name="reserve" required/><br/>
+					Reserve(Your min selling price, hidden from buyer, optional):<input type="number" step="0.01" min = "0.00" name="reserve" default = 0/><br/>
         			End Date(MM/DD):<input required type="date" name="endDate" pattern="(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"/><br/>	
         			End Time(HH:MM:SS):<input required type = "time" name="endTime" placeholder = "HH:MM:SS" pattern = "^([0-1]\d|2[0-3]):([0-5]\d):([0-5]\d)$"><br/>	
 					<h2>Pant Info</h2>
@@ -114,7 +114,7 @@
 						
 					Starting Price(Max 9999):<input type="number" step="0.01" min = "0.00" name="initialPrice" required/><br/>
 					Increment:<input type="number" step="0.01" min = "0.00" name="increment"required/><br/>
-					Reserve(Your min selling price, hidden from buyer):<input type="number" step="0.01" min = "0.00" name="reserve" required/><br/>
+					Reserve(Your min selling price, hidden from buyer, optional):<input type="number" step="0.01" min = "0.00" name="reserve" default = 0/><br/>
         			End Date(MM/DD):<input required type="date" name="endDate" pattern="(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"/><br/>	
         			End Time(HH:MM:SS):<input required type = "time" name="endTime" placeholder = "HH:MM:SS" pattern = "^([0-1]\d|2[0-3]):([0-5]\d):([0-5]\d)$"><br/>
 					<h2>Shoes Info</h2>
@@ -193,6 +193,6 @@
 				
 		<% }		
 		%>
-	
+	<a href='endUserHome.jsp'>Return to Home</a>
 </body>
 </html>
